@@ -50,9 +50,17 @@ public class CourseController {
     }
 
     @GetMapping
+    @ResponseBody
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
-    public ResponseEntity<List<Course>> getAllCourses() {
-        List<Course> courses = courseRepository.findAll(); // Fetch all courses from the repository
+    public ResponseEntity<List<Course>> getAllCourses(@RequestParam String category) {
+        System.out.println(category);
+        List<Course> courses;
+        if (category.equals("")) {
+            courses = courseRepository.findAll(); // Fetch all courses from the repository
+        } else {
+            courses = courseRepository.findAllByCategory(category);
+        }
+
         return ResponseEntity.ok(courses); // Return 200 OK with the list of courses
     }
 
@@ -83,6 +91,7 @@ public class CourseController {
         // Update title and description
         existingCourse.setTitle(newCourseDto.getTitle());
         existingCourse.setDescription(newCourseDto.getDescription());
+        existingCourse.setCategory(newCourseDto.getCategory());
 
         // Update authors without replacing existing ones
         Set<User> authors = new HashSet<>(existingCourse.getAuthors());
@@ -112,6 +121,7 @@ public class CourseController {
         Course course = Course.builder()
                 .title(newCourseDto.getTitle())
                 .description(newCourseDto.getDescription())
+                .category(newCourseDto.getCategory())
                 .build();
 
         // Find authors by their IDs

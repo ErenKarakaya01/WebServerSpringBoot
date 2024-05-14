@@ -13,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class NewCourseDto {
     private String title;
     private String description;
+    private String category;
     private Long[] authors;
     private Long[] sections;
 }

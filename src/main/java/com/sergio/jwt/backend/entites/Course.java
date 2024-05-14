@@ -25,6 +25,8 @@ public class Course {
 
     private String description;
 
+    private String category;
+
     @JsonIgnore
     @ManyToMany
     @JoinTable(
