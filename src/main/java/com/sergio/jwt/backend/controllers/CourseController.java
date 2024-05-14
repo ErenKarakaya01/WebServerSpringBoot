@@ -1,7 +1,9 @@
 package com.sergio.jwt.backend.controllers;
 
 import com.sergio.jwt.backend.dtos.NewCourseDto;
+import com.sergio.jwt.backend.dtos.NewSectionDto;
 import com.sergio.jwt.backend.entites.Course;
+import com.sergio.jwt.backend.entites.Section;
 import com.sergio.jwt.backend.entites.User;
 import com.sergio.jwt.backend.repositories.CourseRepository;
 import com.sergio.jwt.backend.repositories.UserRepository;
@@ -146,6 +148,7 @@ public class CourseController {
 
         return ResponseEntity.created(location).body(createdCourse);
     }
+
 }
 
 
